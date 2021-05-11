@@ -1,15 +1,8 @@
-import { Alma } from './test';
+const button = document.querySelector(".generate")
+button?.addEventListener("click", generate);
 
-const kukac: String = 'ALMA';
-
-const test: String = 'KORTE';
-
-for (let index = 0; index < 5; index++) {
-    console.log(index);
+function generate(this: HTMLElement) {
+    const widthInput = <HTMLInputElement>document.querySelector(".width");
+    console.log("Clicked!");
+    console.log(widthInput.value);
 }
-console.log(kukac);
-console.log(test);
-
-let alma = new Alma('aaaaa');
-
-console.log(alma.alma);
