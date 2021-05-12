@@ -50,9 +50,6 @@ function colorCell(this: HTMLTableCellElement) {
     } else {
         this.style.backgroundColor = backgroundColor;
     }
-
-    this.setAttribute("type","text");
-    this.setAttribute("type","color");
 }
 
 function changeColor(this: HTMLInputElement) {
