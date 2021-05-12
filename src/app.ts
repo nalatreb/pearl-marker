@@ -1,9 +1,10 @@
 const container = document.getElementById("container");
 const button = document.querySelector(".generate");
 const colorPicker = <HTMLInputElement>document.querySelector("input[name='color']");
+const spacing = <HTMLInputElement>document.querySelector("input[name='spacing']");
 
-let backgroundColor = "rgb(255, 0, 0)";
-const defaultBackgroundColor = "rgb(255, 255, 255)";
+let backgroundColor = "#ff0000";
+const defaultBackgroundColor = "#ffffff";
 
 button?.addEventListener("click", generate);
 
@@ -17,6 +18,12 @@ function generate(this: HTMLElement) {
     const rows = Number((<HTMLInputElement>document.querySelector("input[name='rows']")).value);
 
     const table = <HTMLTableElement> document.createElement("table");
+
+    if (spacing?.checked) {
+        table.style.borderSpacing = "1px";
+    } else {
+        table.style.borderSpacing = "0";
+    }
 
     for (let i = 0; i < rows; i++) {
         let tr = <HTMLTableRowElement> document.createElement("tr");
@@ -36,9 +43,9 @@ function generate(this: HTMLElement) {
 }
 
 function colorCell(this: HTMLTableCellElement) {
-    console.log(this.style.backgroundColor, backgroundColor);
+    const elementColorInHex = this.style.backgroundColor ? rgba2hex(this.style.backgroundColor) : null;
     
-    if (this.style.backgroundColor === backgroundColor) {
+    if (elementColorInHex === backgroundColor) {
         this.style.backgroundColor = defaultBackgroundColor;
     } else {
         this.style.backgroundColor = backgroundColor;
@@ -51,3 +58,5 @@ function colorCell(this: HTMLTableCellElement) {
 function changeColor(this: HTMLInputElement) {
     backgroundColor = this.value;
 }
+
+const rgba2hex = (rgba: any) => `#${rgba.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+\.{0,1}\d*))?\)$/).slice(1).map((n: string, i: Number) => (i === 3 ? Math.round(parseFloat(n) * 255) : parseFloat(n)).toString(16).padStart(2, '0').replace('NaN', '')).join('')}`;

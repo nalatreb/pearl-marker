@@ -8,7 +8,8 @@ module.exports = {
         path: path.resolve(__dirname, 'dist')
     },
     devServer: {
-        publicPath: '/dist/'
+        publicPath: '/dist/',
+        port: 1234
     },
     devtool: 'inline-source-map',
     module: {
